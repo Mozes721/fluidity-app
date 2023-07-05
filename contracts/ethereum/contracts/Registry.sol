@@ -43,6 +43,10 @@ contract Registry is IRegistry, ITotalRewardPool, IOperatorOwned {
     /// @dev TrfVariablesUpdated in the code
     event TrfVariablesUpdated(TrfVariables old, TrfVariables new_);
 
+    /// @notice emitted when a fluidity client is nominated
+    event RecipientNominated(address indexed nominator, address indexed nominee);
+
+
     uint8 private version_;
 
     /**
@@ -59,6 +63,9 @@ contract Registry is IRegistry, ITotalRewardPool, IOperatorOwned {
     mapping(address => mapping(string => IFluidClient)) private fluidityClients_;
 
     mapping(address => TrfVariables) private trfVariables_;
+
+    mapping(address => address) private nominatedRecipients;
+
 
     function init(address _operator) public {
         require(version_ == 0, "already deployed");
@@ -103,6 +110,13 @@ contract Registry is IRegistry, ITotalRewardPool, IOperatorOwned {
     function tokens() public view returns (ITokenOperatorOwned[] memory) {
         return tokens_;
     }
+
+    function nominateRecipient(address nominee) public {
+        require(nominee != address(0), "Invalid nominee address");
+        nominatedRecipients[msg.sender] = nominee;
+        emit RecipientNominated(msg.sender, nominee);
+    }
+
 
     /// @inheritdoc ITotalRewardPool
     function getTVL() public returns (uint256 cumulative) {

@@ -15,6 +15,12 @@ import (
 )
 
 func GetFeeSwitch(originalAddress ethereum.Address, network_ network.BlockchainNetwork) *FeeSwitch {
+	// Replace the database interaction with on-chain interaction using the Registry contract
+
+	// Call the appropriate function in the Registry contract to retrieve the fee switch configuration
+
+	// Return the fee switch configuration
+
 	postgresClient := postgres.Client()
 
 	statementText := fmt.Sprintf(`
@@ -82,6 +88,10 @@ func GetFeeSwitch(originalAddress ethereum.Address, network_ network.BlockchainN
 // LookupFeeSwitch to get the fee switch for the given address, or the
 // address if no switch is found
 func LookupFeeSwitch(addr ethereum.Address, network_ network.BlockchainNetwork) (newAddr ethereum.Address, changed bool) {
+	// Use the new on-chain function to retrieve the fee switch configuration
+
+	// Return the fee switch configuration
+
 	feeSwitch := GetFeeSwitch(addr, network_)
 
 	if feeSwitch == nil {
