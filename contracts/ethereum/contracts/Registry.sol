@@ -6,6 +6,7 @@
 
 pragma solidity 0.8.16;
 pragma abicoder v2;
+pragma experimental ABIEncoderV2;
 
 import "../interfaces/ILiquidityProvider.sol";
 import "../interfaces/IOperatorOwned.sol";

@@ -4,3 +4,4 @@ cache
 artifacts
 docker*
 hardhat-dependency-compiler
+hardhat.config.ts
